@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vercel Proxy</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 2em; background: #f9f9f9; }
+        h1 { color: #333; }
+        #proxyForm { display: flex; gap: 10px; }
+        #urlInput { flex-grow: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; }
+        button { padding: 10px 20px; background: #0070f3; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #005bb5; }
+    </style>
+</head>
+<body>
+
+    <h1>🚀 Vercel 高速プロキシ</h1>
+    <p>見たいサイトの完全なURLを入力してください。（例: <code>https://httpbin.org/html</code>）</p>
+    
+    <form id="proxyForm">
+        <input type="text" id="urlInput" placeholder="https://example.com" required>
+        <button type="submit">表示</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('proxyForm');
+        const input = document.getElementById('urlInput');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const targetUrl = input.value;
+            if (!targetUrl) return;
+
+            // プロキシAPIのURLを構築
+            // (例: /api/proxy?target=https://example.com)
+            const proxyApiUrl = `/api/proxy?target=${encodeURIComponent(targetUrl)}`;
+            
+            // 新しいタブでプロキシURLを開く
+            window.open(proxyApiUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
